@@ -10,6 +10,9 @@ public class HealpetApplication {
 		SpringApplication.run(HealpetApplication.class, args);
 		String test = "Hello world!!";
 		System.out.println(test + "2");
+
+		String test2 = "Hello Java!";
+		System.out.println(test2);
 	}
 
 }
