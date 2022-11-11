@@ -1,1 +1,24 @@
+spring:
 
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/healpet?userSSL=false&characterEncoding=UTF-8
+    username: root
+    password: 1234
+
+server:
+  error:
+    whitelabel:
+      enabled: false
+
+  servlet:
+    encoding:
+      charset: UTF-8
+  port: 8080
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

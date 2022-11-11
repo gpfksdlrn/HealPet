@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration>
+
+    <!-- 로그파일 경로 및 패턴 설정 -->
+    <property name="LOG_PATH_NAME" value="./logs/logger"/>
+    <property name="LOG_PATH_NAME_DEBUG" value="./logs/debug/logger"/>
+    <property name="LOG_PATTERN" value="%d{HH:mm:ss} [%thread] [%-5p] %msg%n"/>
+    <property name="LOG_PATTERN_DEBUG" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5p] [%logger{30}:%line] %msg%n"/>
+
+    <!-- 파일 로그   -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH_NAME}.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                ${LOG_PATTERN}
+            </Pattern>
+        </encoder>
+        <!--시간별 롤링-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH_NAME}.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- 파일 상세 로그   -->
+    <appender name="FILE_DETAIL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH_NAME_DEBUG}.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                ${LOG_PATTERN_DEBUG}
+            </Pattern>
+        </encoder>
+        <!--시간별 롤링-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH_NAME_DEBUG}.log.%d{yyyy-MM-dd_HH}.gz</fileNamePattern>
+            <maxHistory>720</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!--콘솔 로그  -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${LOG_PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <!-- com.example.detect 아래 패키지 로그들만  consoleAppender, fileAppender 방법으로 로그를 남긴다.
+       물론 <appender-ref ref="consoleAppender" />를 추가하여 콘솔로도 로그를 남길 수 있다. -->
+    <!--    <looger s3Key="com.embrace.streamcheckpool" level="INFO" additivity="false">-->
+    <!--        <appender-ref ref="FILE"/>-->
+    <!--        <appender-ref ref="ERROR"/>-->
+    <!--        <appender-ref ref="ConsoleAppender"/>-->
+    <!--    </looger>-->
+
+    <root level="DEBUG">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="FILE_DETAIL"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+
+</configuration>

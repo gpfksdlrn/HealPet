@@ -1,0 +1,17 @@
+
+
+spring:
+  streamcheck:
+    datasource:
+      type: com.zaxxer.hikari.HikariDataSource
+      driverClassName: com.mysql.cj.jdbc.Driver
+      jdbcUrl: jdbc:mysql://210.183.33.165:3306/healpet?userSSL=false&characterEncoding=UTF-8
+      username: manage
+      password: qwe123!@#
+      hikari:
+        poolName: streamsCP
+        connectionTimeout: 10000
+        maximumPoolSize: 20
+        minimumIdle: 6
+
+
