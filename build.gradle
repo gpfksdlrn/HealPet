@@ -32,6 +32,9 @@ dependencies {
 
 	// Mysql 설정
 	runtimeOnly 'mysql:mysql-connector-java'
+
+	//JPA 설정
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 }
 
 tasks.named('test') {
