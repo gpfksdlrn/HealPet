@@ -18,23 +18,15 @@ public class AuthController {
 
     @GetMapping("list")
     @Transactional
-    public MemberVO memberList() throws Exception {
-        MemberVO member = authService.memberList();
-
-        return member;
-    }
-
-    @GetMapping("jpaList")
-    @Transactional
-    public Object memberJpaList() throws Exception {
-        Object member = authService.getMemberJpa();
+    public Object memberList() throws Exception {
+        Object member = authService.getMember();
 
         return member;
     }
 
     @PostMapping("add")
     @Transactional
-    public Object memberAdd(@RequestBody MemberAddRequest memberAddRequest) throws Exception{
+    public Object memberAdd(@RequestBody MemberAddRequest memberAddRequest) throws Exception {
         Object addResult = authService.addMember(memberAddRequest);
 
         return addResult;

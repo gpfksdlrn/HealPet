@@ -28,26 +28,22 @@ public class AuthService {
    private final MemberDao memberDao;
    private final MemberRepository memberRepository;
 
-    public MemberVO memberList() throws Exception{
-        MemberVO vo = new MemberVO();
-
-        try {
-            vo = memberDao.selectMember();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return vo;
-    }
-
     @Transactional
-    public Object getMemberJpa() throws Exception {
+    public Object getMember() throws Exception {
         List<HealPetMember> member = null;
 
         try {
             member = memberRepository.findAllByUseYn("Y");
+            logger.info("멤버정보:{}",member);
+
+            if(member.isEmpty()) {
+                logger.error("멤버정보가 조회되지 않습니다.");
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error("멤버 정보 조회 실패:{}",e.toString());
         }
 
         return member;
@@ -76,6 +72,9 @@ public class AuthService {
 
             res.put("code","SS1000001");
             res.put("message","성공");
+
+            logger.info("멤버생성 성공 멤버정보:{}",save);
+
             res.put("body",new HashMap<>());
 
         } catch (Exception e) {

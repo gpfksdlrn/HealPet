@@ -1,5 +1,7 @@
 spring:
-
+  config:
+    activate:
+      on-profile: real
   ## JPA Setting Info
   jpa:
     hibernate:
